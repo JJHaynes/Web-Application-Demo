@@ -1,0 +1,20 @@
+If you cock up the db, here are the commands to drop and create it:
+
+# 1) Drop
+docker exec -i charity-lottery-db \
+  psql -U postgres \
+  -c 'DROP DATABASE IF EXISTS "charity-lottery-dev";'
+
+# 2) Create
+docker exec -i charity-lottery-db \
+  psql -U postgres \
+  -c 'CREATE DATABASE "charity-lottery-dev" OWNER postgres;'
+
+Update migrations:
+alembic -c backend/alembic.ini upgrade head
+
+Create new migration:
+alembic -c backend/alembic.ini revision --autogenerate -m "Initial Schema";
+
+run API
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000

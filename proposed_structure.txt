@@ -1,0 +1,60 @@
+├── .gitignore
+├── README.md
+├── docker-compose.yml           # bring up Postgres + backend + frontend locally
+├── .env.example                 # sample env vars for both services
+│
+├── backend/                     # Python / FastAPI service
+│   ├── Dockerfile
+│   ├── pyproject.toml           # or requirements.txt
+│   ├── alembic.ini
+│   ├── alembic/
+│   │   ├── env.py
+│   │   └── versions/            # auto‐generated migration files
+│   │
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py              # FastAPI instantiation & include routers
+│   │   ├── db.py                # engine, session, Base
+│   │   ├── core/
+│   │   │   ├── config.py        # pydantic Settings
+│   │   │   └── security.py      # password hashing, JWT utils
+│   │   ├── models/              # SQLAlchemy models
+│   │   │   ├── __init__.py
+│   │   │   └── charity.py
+│   │   ├── schemas/             # Pydantic request/response schemas
+│   │   │   ├── __init__.py
+│   │   │   └── charity.py
+│   │   ├── crud/                # DB‐access functions
+│   │   │   ├── __init__.py
+│   │   │   └── charity.py
+│   │   ├── api/                 # route definitions
+│   │   │   ├── __init__.py
+│   │   │   └── routers/
+│   │   │       ├── charity.py
+│   │   │       └── admin.py
+│   │   └── utils/               # helpers (e.g. pagination, email)
+│   │
+│   └── tests/                   # pytest tests
+│       ├── conftest.py
+│       └── test_charity.py
+│
+├── frontend/                    # Next.js + React
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── next.config.js
+│   ├── tailwind.config.js
+│   ├── .env.local               # NEXT_PUBLIC_API_URL, auth client IDs
+│   ├── public/                  # static assets
+│   │   └── logo.png
+│   └── src/
+│       ├── components/          # reusable UI pieces
+│       ├── pages/               # Next.js pages (index.tsx, /charities, /admin, etc.)
+│       ├── styles/              # globals.css, tailwind imports
+│       ├── utils/               # API client wrappers, fetch helpers
+│       └── hooks/               # custom React hooks (e.g. useAuth)
+│
+└── infra/                       # Infrastructure as code & CI/CD
+    ├── docker-compose.yml       # overrides for staging/production
+    ├── terraform/               # if you choose Terraform for Azure
+    ├── azure-pipelines.yml      # or GitHub Actions in .github/
+    └── scripts/                 # helper scripts (e.g. seed_db.py)

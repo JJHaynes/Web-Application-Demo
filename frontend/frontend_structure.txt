@@ -1,0 +1,80 @@
+/
+├── app/
+│   ├── layout.jsx               # root layout (header/nav + footer)
+│   ├── globals.css              # global styles import
+│   ├── page.jsx                 # marketing home (open-for-all)
+│   ├── about/
+│   │   └── page.jsx             # about us
+│   ├── faq/
+│   │   └── page.jsx             # FAQs page
+│   ├── auth/
+│   │   ├── login/
+│   │   │   └── page.jsx
+│   │   └── signup/
+│   │       └── page.jsx
+│   ├── dashboard/               # protected area + role gating
+│   │   ├── participant/
+│   │   │   ├── layout.jsx       # participant-specific layout (side nav)
+│   │   │   ├── page.jsx         # participant dashboard overview
+│   │   │   └── lotteries/
+│   │   │       ├── [id]/        # dynamic lottery pages
+│   │   │       │   └── page.jsx
+│   │   │       └── index.jsx    # list of lotteries joined
+│   │   ├── charity-admin/
+│   │   │   ├── layout.jsx       # charity-admin layout
+│   │   │   ├── page.jsx         # charity admin dashboard
+│   │   │   └── lotteries/
+│   │   │       ├── new/
+│   │   │       │   └── page.jsx # create lottery form
+│   │   │       ├── [id]/
+│   │   │       │   └── page.jsx # manage single lottery
+│   │   │       └── index.jsx    # list of created lotteries
+│   │   └── super-admin/
+│   │       ├── layout.jsx       # super-admin layout
+│   │       ├── page.jsx         # super-admin overview
+│   │       └── charities/
+│   │           ├── [charityId]/
+│   │           │   └── page.jsx # view/manage specific charity
+│   │           └── index.jsx    # list of all charities
+│   └── api/                     # (if mixing pages-router APIs)
+│       ├── auth/…               # login/signup API handlers
+│       └── lotteries/…          # REST endpoints
+│
+├── components/                  # shared UI atoms/molecules
+│   ├── Header.jsx
+│   ├── Footer.jsx
+│   ├── Button.jsx
+│   ├── Accordion.jsx
+│   └── ...
+│
+├── hooks/                       # custom React hooks
+│   ├── useAuth.js
+│   ├── useRole.js
+│   └── useLottery.js
+│
+├── lib/                         # utilities & API client
+│   ├── apiClient.js
+│   ├── auth.js
+│   └── config.js
+│
+├── middleware.ts                # role-based routing guard
+├── models/                      # DB / Prisma schemas or Mongoose models
+│   └── lottery.js
+│
+├── prisma/                      # Prisma schema (if using Prisma)
+│   └── schema.prisma
+│
+├── public/                      # static assets
+│   ├── images/
+│   │   └── hero.jpg
+│   └── favicon.ico
+│
+├── styles/                      # Tailwind config, globals
+│   ├── tailwind.config.js
+│   └── postcss.config.js
+│
+├── utils/                       # small helpers
+├── .env.local
+├── next.config.js
+├── package.json
+└── tsconfig.json (if using TS)
